@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Products management{% endblock %}
+
+{% block body %}
+    {% include 'dashboard/sidebar.html.twig' %}
+        <div class="p-4 sm:ml-64">   
+        <div class="flex justify-end mb-4">
+            <a href="{{ path('admin_create_product') }}" class="inline-flex items-center px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700">
+                Add New Product
+            </a>
+        </div>
+
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+             {% if products is empty %}
+                <div class="text-center py-8">
+                    <p class="text-gray-500 text-lg">No products available.</p>
+                </div>
+             {% else %}
+                <table class="w-full text-sm text-center text-gray-500">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                Product ID
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Name
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Category
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Description
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                 Price
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                         {% for product in products %}
+                            <tr class="bg-white border-b">
+                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                     {{ product.id }} 
+                                </th>
+                                <td class="px-6 py-4">
+                                     {{ product.name }}
+                                </td>
+                                <td class="px-6 py-4">
+                                     {{ product.category }} 
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ product.description }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ product.price }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <a href="{{ path('admin_edit_product', {'id': product.id}) }}" class="font-medium text-blue-600 hover:underline">Edit</a>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a href="{{ path('admin_delete_product', {'id': product.id}) }}" class="font-medium text-blue-600 hover:underline">Delete</a>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a href="{{ path('admin_show_product', {'id': product.id}) }}" class="font-medium text-blue-600 hover:underline">Show</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

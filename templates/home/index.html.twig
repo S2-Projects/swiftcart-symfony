@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Products{% endblock %}
+
+{% block body %}
+    {% include 'home/categories.html.twig' %}
+
+    {% include 'navbar.html.twig' %}
+        <div class=" sm:ml-64">
+
+        {% if products is empty %}
+            <div class="text-center py-8 mt-8">
+                <p class="text-gray-500 text-lg">No products available.</p>
+            </div>
+        {% else %}
+        <div class="list-card">
+         {% for product in products %}
+         <div class="card">
+            <div class="flex justify-center items-center">
+            <a href="{{ path('info_product', {'id': product.id}) }}">
+                <img src="{{ asset('img/products/' ~ product.image) }}" alt="product image" style="max-width: 200px;" />
+                </a>
+                </div>
+
+            <div class="card-content">
+                <a href="{{ path('info_product', {'id': product.id}) }}">
+                    <h5>{{product.name}}</h5>
+                </a>
+                <p>Category : {{product.category}}</p> <!-- Add the category element here -->
+                <div class="price">${{product.price}}</div>
+                {% if app.user and not is_granted('ROLE_ADMIN') %}
+                <form action="{{ path('add_cart', {'id': product.id}) }}" method="POST">
+                <button class="add-to-cart">Add to Cart</button>
+                </form>
+            {% endif %}
+
+            </div>
+            </div>
+
+        {% endfor %}
+
+
+        </div>
+    {% endif %}
+    </div>
+
+{% endblock %}
