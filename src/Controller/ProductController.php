@@ -121,7 +121,7 @@ class ProductController extends AbstractController
                 // Delete the original image if it is different from 'no-image.png'
                 if ($originalImage !== 'no-image.png') {
                     $imagePath = $this->getParameter('kernel.project_dir') . '/public/img/products/' . $originalImage;
-                    
+                     
                     // Check if the original image file exists and delete it
                     if ($filesystem->exists($imagePath)) {
                         $filesystem->remove($imagePath);
@@ -129,7 +129,7 @@ class ProductController extends AbstractController
                 }
                 
                 // Generate a unique filename for the new image
-                $newImageFileName = md5(uniqid()) . '.' . $newImage->guessExtension();
+                $newImageFileName = uniqid() . '.' . $newImage->guessExtension();
                 
                 // Move the new image to the desired location
                 $newImage->move($this->getParameter('kernel.project_dir') . '/public/img/products/', $newImageFileName);
@@ -137,12 +137,9 @@ class ProductController extends AbstractController
                 // Update the product's image property
                 $product->setImage($newImageFileName);
             }
-    
             $this->entityManager->flush();
-    
             return $this->redirectToRoute('admin_app_product');
         }
-    
         return $this->render('product/edit.html.twig', [
             'form' => $form->createView(),
             'product' => $product,

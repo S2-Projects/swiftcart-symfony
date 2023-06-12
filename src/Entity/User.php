@@ -132,27 +132,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
 
-
-    // public function addCart(Cart $cart): self
-    // {
-    //     if (!$this->carts->contains($cart)) {
-    //         $this->carts->add($cart);
-    //         $cart->setUser($this);
-    //     }
-
-    //     return $this;
-    // }
-
-    // public function removeCart(Cart $cart): self
-    // {
-    //     if ($this->carts->removeElement($cart)) {
-    //         // set the owning side to null (unless already changed)
-    //         if ($cart->getUser() === $this) {
-    //             $cart->setUser(null);
-    //         }
-    //     }
-
-    //     return $this;
-    // }
-
 }

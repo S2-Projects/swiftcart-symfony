@@ -60,7 +60,7 @@ class CategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->flush();
 
-            return $this->redirectToRoute('app_category');
+            return $this->redirectToRoute('admin_app_category');
         }
 
         return $this->render('category/edit.html.twig', [

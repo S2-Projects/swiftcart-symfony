@@ -77,19 +77,18 @@ class HomeController extends AbstractController
 
     
     #[Route('/product/{id}/info', name: 'info_product')]
-    public function show(Product $product): Response
+    public function show(Product $product=null): Response
     {
+
+        if (!$product) {
+            return $this->render('404/notfound.html.twig',[
+                'categories' => $this->categories,
+            ]);
+        }
+
         return $this->render('home/show.html.twig', [
             'product' => $product,
             'categories' => $this->categories
-        ]);
-    }
-
-    #[Route('/access-denied', name: 'app_access_denied')]
-    public function accessDenied(): Response
-    {
-        return $this->render('404/notfound.html.twig',[
-            'categories' => $this->categories,
         ]);
     }
 }

@@ -37,7 +37,7 @@ class DashboardController extends AbstractController
             'userCount' => $userCount,
         ]);
         
-        return  $this->render('404/notfound.html.twig');
+        
      
     }
 }
