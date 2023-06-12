@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin dashboard{% endblock %}
+{% block javascripts %}<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>{% endblock %}
+
+{% block body %}
+    {% include 'dashboard/sidebar.html.twig' %}
+        <div class="p-4 sm:ml-64">
+            <div class="p-4 ">
+               <div class="grid grid-cols-3 gap-4 mb-4">
+                  <div class="flex items-center justify-center h-24 rounded bg-gray-50">
+                    <a href="{{path('admin_app_user')}}" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Numbers of users in SwiftCart</h5>
+                        <p class="font-normal text-gray-700">{{ userCount }} Users</p>
+                    </a>
+                     </div>
+                     <div class="flex items-center justify-center h-24 rounded bg-gray-50">
+                        <a href="{{path('admin_app_product')}}" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Numbers of products in SwiftCart</h5>
+                            <p class="font-normal text-gray-700">{{ productCount }} Products</p>
+                        </a>
+                         </div>
+                         <div class="flex items-center justify-center h-24 rounded bg-gray-50">
+                            <a href="{{path('admin_app_category')}}" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
+                                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Numbers of categories in SwiftCart</h5>
+                                <p class="font-normal text-gray-700">{{ categoryCount }} Categories</p>
+                            </a>
+                             </div>
+                  </div>
+                  </div>
+                  </div>
+     
+
+     
+    </div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Not found{% endblock %}
+
+{% block body %}
+    {% include 'navbar.html.twig' %}
+    {% include 'home/categories.html.twig' %}
+    <div class="content">
+        <div class="flex justify-center mb-4 ml-64">
+            <div class="text-center py-8 mt-8">
+                <p class="text-gray-500 text-lg">404 Not found</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

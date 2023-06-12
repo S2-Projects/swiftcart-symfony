@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+        <style>
+          .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+            background-color: #ffffff;
+            padding: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .content {
+            margin-top: 100px;
+            margin-bottom: 20px;
+            padding: 20px;
+
+        }
+    
+        .list-card {
+            margin-top: 80px;
+            margin-bottom: 20px;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Display 4 cards in a row */
+            grid-gap: 20px; /* Add gap between cards */
+        }
+    
+        @media (max-width: 768px) {
+            .list-card {
+                grid-template-columns: repeat(2, 1fr); /* Adjust to 2 cards per row on smaller screens */
+            }
+        }
+    
+        .card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    
+        .card a {
+            text-decoration: none;
+        }
+    
+        .card img {
+            padding: 8px;
+            border-radius: 8px 8px 0 0;
+        }
+    
+        .card h5 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-top: 12px;
+            margin-bottom: 8px;
+        }
+    
+        .card .rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+    
+        .card .rating svg {
+            width: 20px;
+            height: 20px;
+            fill: #fbbf24;
+            margin-right: 4px;
+        }
+    
+        .card .price {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+        }
+    
+        .card .add-to-cart {
+            background-color: #1e40af;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+    
+        .card .add-to-cart:hover {
+            background-color: #1c3d95;
+        }
+      </style>
+    {% endblock %}
+
+    {% block javascripts %}
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+<body>
+
+<div class="container">
+{% block body %}{% endblock %}
+    </div>
+    <script>
+   document.addEventListener('DOMContentLoaded', function() {
+    var dropdownToggle = document.querySelector('[data-dropdown-toggle="user-dropdown"]');
+    var dropdownMenu = document.querySelector('#user-dropdown');
+
+    dropdownToggle.addEventListener('click', function() {
+      dropdownMenu.classList.toggle('hidden');
+    });
+  });
+
+  // Function to handle menu toggle on screen resize
+  function handleMenuToggle() {
+    const menuButton = document.querySelector('[data-collapse-toggle="navbar-sticky"]');
+    const navbarSticky = document.getElementById('navbar-sticky');
+
+    function toggleMenu() {
+      navbarSticky.classList.toggle('hidden');
+    }
+
+    function checkScreenWidth() {
+      if (window.innerWidth <= 768) {
+        menuButton.addEventListener('click', toggleMenu);
+      } else {
+        menuButton.removeEventListener('click', toggleMenu);
+        navbarSticky.classList.remove('hidden');
+      }
+    }
+
+    // Initial check on page load
+    checkScreenWidth();
+
+    // Function to handle the window resize event
+    function handleResize() {
+      checkScreenWidth();
+    }
+
+    // Attach resize event listener to the window
+    window.addEventListener('resize', handleResize);
+  }
+
+  // Call the function to handle the menu toggle
+  handleMenuToggle();
+
+
+</script>
+
+</body>
+</html>
+

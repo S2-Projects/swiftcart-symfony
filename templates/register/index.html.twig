@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register!{% endblock %}
+
+{% block body %}
+    <div class="flex items-center justify-center">
+        <div class="bg-white shadow-lg rounded-lg p-8 w-full sm:max-w-md my-8">
+            <a href="#" class="flex justify-center items-center mb-6">
+                <img src="{{ asset('img/Swiftcart.png') }}" alt="logo" class="w-48 h-auto">
+            </a>
+
+            <form action="{{ path('app_register') }}" method="POST">
+                {{ form_start(form) }}
+                <div class="mb-6">
+                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Name</label>
+                    {{ form_widget(form.name, { 'attr': {'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'} }) }}
+                </div>
+                <div class="mb-6">
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Email</label>
+                    {{ form_widget(form.email, { 'attr': {'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'} }) }}
+                </div>
+                <div class="mb-6">
+                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
+                    {{ form_widget(form.password, { 'attr': {'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'} }) }}
+                    {% if form.password.vars.errors|length > 0 %}
+                        <ul class="text-red-500">
+                            {% for error in form.password.vars.errors %}
+                                <li><span class="text-red-500">{{ error.message }}</span></li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                <div class="mb-6">
+                    <label for="confirm_password" class="block mb-2 text-sm font-medium text-gray-900">Confirm Password</label>
+                    {{ form_widget(form.confirm_password, { 'attr': {'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'} }) }}
+                    {% if form.confirm_password.vars.errors|length > 0 %}
+                        <ul class="text-red-500">
+                            {% for error in form.confirm_password.vars.errors %}
+                                <li>{{ error.message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                <div class="flex items-start mb-6">
+                    <div class="flex items-center h-5">
+                        <p class="text-md">Already a user?</p>
+                        <span class="text-gray-500 mx-1"></span>
+                        <a href="{{ path('app_login') }}" class="text-blue-700 hover:text-blue-800">Login</a>
+                    </div>
+                </div>
+                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Register</button>
+                {{ form_end(form) }}
+            </form>
+        </div>
+    </div>
+{% endblock %}

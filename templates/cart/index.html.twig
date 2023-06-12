@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My cart{% endblock %}
+
+{% block body %}
+    {% include 'home/categories.html.twig' %}
+
+    {% include 'navbar.html.twig' %}
+    <div class="p-4 sm:ml-64"> 
+        <div class="text-center py-8 mt-8">
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                {% if products is empty %}
+                    <div class="text-center py-8">
+                        <p class="text-gray-500 text-lg">Cart Empty</p>
+                    </div>
+                {% else %}
+                    <table class="w-full text-sm text-center text-gray-500">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">
+                                    Image
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Name
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Category
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Price
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for product in products %}
+                                <tr class="bg-white border-b">
+                                    <td class="px-6 py-4 flex items-center justify-center">
+                                        <img src="{{ asset('img/products/' ~ product.image) }}" alt="product image" class="w-20 h-20">
+                                    </td>
+
+                                    <td class="px-6 py-4">
+                                        {{ product.name }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ product.category }} 
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ product.price }} $ 
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <a href="{{ path('remove_cart', {'id': product.id}) }}" class="font-medium text-blue-600 hover:underline">Delete from cart</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            <tr class="bg-white border-b">
+                                <td colspan="3" class="px-6 py-4 text-right">
+                                    <strong>Total:</strong>
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ totalPrices }}$
+                                </td>
+                                <td>
+                                    <div class="flex justify-end mt-4">
+                                        <a href="{{ path('clear_cart') }}" onclick="checkout()" class="inline-flex items-center px-4 py-2 mr-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700">
+                                            Checkout
+                                        </a>
+                                        <a href="{{ path('clear_cart') }}" class="inline-flex items-center px-4 py-2 mr-2 font-medium text-blue">
+                                            Clear
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function checkout() {
+            alert("Thank you for your purchase!");
+        }
+    </script>
+{% endblock %}
